@@ -116,11 +116,9 @@ Mode &lt;- function(x) {
   datac$ci &lt;- datac$se * ciMult
   return(datac)
 }</code></pre>
-<p>The following function will give us the count, mean, standard deviation, standard error of the mean, and confidence interval (default 95%). Details are in annotations within script.</p>
-<p>Important Variables: - data: a data frame. - measurevar: the name of a column that contains the variable to be summarized - groupvars: a vector containing names of columns that contain grouping variables - na.rm: a boolean that indicates whether to ignore NA’s - conf.interval: the percent range of the confidence interval (default is 95%)</p>
 </div>
-<div id="preparation-load-packages-and-read-in-data" class="section level3">
-<h3>Preparation: Load packages and read in data</h3>
+<div id="preparation-load-packages" class="section level3">
+<h3>Preparation: Load packages</h3>
 <p>Here, we load packages that we’ll need later on in the code.</p>
 <pre class="r"><code>library(curl)</code></pre>
 <pre><code>## Warning: package 'curl' was built under R version 3.1.3</code></pre>
@@ -141,6 +139,9 @@ library(ggplot2)</code></pre>
 <pre class="r"><code>library(AICcmodavg)
 library(car)</code></pre>
 <pre><code>## Warning: package 'car' was built under R version 3.1.3</code></pre>
+</div>
+<div id="preparation-read-in-data" class="section level3">
+<h3>Preparation: read in data</h3>
 <p>Next, we want to read in the relevant datafile (from the data-reanalysis-assignment repo) and show a few lines of raw data in your output (e.g., using head()).</p>
 <pre class="r"><code>f &lt;- curl(&quot;https://raw.githubusercontent.com/jamjulie/data-reanalysis-assignment/master/WarkentinJungRuedaMcDaniel-DataForDeposit.csv&quot;)
 data &lt;- read.csv(f, header = TRUE, sep = &quot;,&quot;, stringsAsFactors = TRUE)
