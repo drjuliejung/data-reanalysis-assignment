@@ -321,7 +321,7 @@ The image of the figure from the original paper that I'm replicating is included
 
 Specifically, we're looking at part A of the figure. 
 
-<img src="img/Fig6.png" width="200px"/>
+<img src="img/Fig6.png" width="600px"/>
 
 
 ALTERNATIVELY, we can use ggplot to create a much prettier plot, with standard errors. Note that ideally the order of younger and older would be switched, but the data presented are the same as presented in the original paper. 
@@ -448,7 +448,7 @@ The image of the figure from the original paper that I'm replicating is included
 
 Specifically, we've replotted part B of this figure. 
 
-<img src="img/Fig6.png" width="200px"/>
+<img src="img/Fig6.png" width="600px"/>
 
 
 Recall that because risk in predator attacks probably accrues as a function of time, 
@@ -557,7 +557,7 @@ The image of the figure from the original paper that I'm replicating is included
 
 Specifically, we've replotted part C of this figure. 
 
-<img src="img/Fig6.png" width="200px"/>
+<img src="img/Fig6.png" width="600px"/>
 
 
 
