@@ -6,7 +6,7 @@ output: html_document
 ---
 ### A Brief Introduction
 
-Arboreal embryos of red-eyed treefrogs, Agalychnis callidryas, hatch prematurely to escape from egg predators, cued by vibrations in attacks. Young embryos modulate hatching based on multiple frequency and temporal properties of cues, reducing false alarms that unnecessarily expose them to risk in the water. Because the cost of false alarms decreases developmentally we hypothesized that, if sampling costs are high or stimuli ambiguous, older embryos would accept more false alarms. 
+Arboreal embryos of red-eyed treefrogs, *Agalychnis callidryas*, hatch prematurely to escape from egg predators, cued by vibrations in attacks. Young embryos modulate hatching based on multiple frequency and temporal properties of cues, reducing false alarms that unnecessarily expose them to risk in the water. Because the cost of false alarms decreases developmentally we hypothesized that, if sampling costs are high or stimuli ambiguous, older embryos would accept more false alarms. 
 
 ### Methods, again briefly 
 
@@ -325,6 +325,8 @@ Specifically, we're looking at part A of the figure.
 
 
 ALTERNATIVELY, we can use ggplot to create a much prettier plot, with standard errors. Note that ideally the order of younger and older would be switched, but the data presented are the same as presented in the original paper. 
+
+If I wanted to, I could switch this order by following the steps through this [link](https://stackoverflow.com/questions/3253641/change-the-order-of-a-discrete-x-scale):
 
 ```{r}
 
