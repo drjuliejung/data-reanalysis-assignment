@@ -6,7 +6,7 @@ output: html_document
 ---
 ### A Brief Introduction
 
-Arboreal embryos of red-eyed treefrogs, ##Agalychnis callidryas##, hatch prematurely to escape from egg predators, cued by vibrations in attacks. Young embryos modulate hatching based on multiple frequency and temporal properties of cues, reducing false alarms that unnecessarily expose them to risk in the water. Because the cost of false alarms decreases developmentally we hypothesized that, if sampling costs are high or stimuli ambiguous, older embryos would accept more false alarms. 
+Arboreal embryos of red-eyed treefrogs, Agalychnis callidryas, hatch prematurely to escape from egg predators, cued by vibrations in attacks. Young embryos modulate hatching based on multiple frequency and temporal properties of cues, reducing false alarms that unnecessarily expose them to risk in the water. Because the cost of false alarms decreases developmentally we hypothesized that, if sampling costs are high or stimuli ambiguous, older embryos would accept more false alarms. 
 
 ### Methods, again briefly 
 
@@ -98,7 +98,7 @@ Here, we load packages that we'll need later on in the code.
 ```{r}
 
 library(curl)
-library(xlsx)
+#library(xlsx)
 library(sciplot)
 library(ggplot2)
 library(MASS)
@@ -306,17 +306,41 @@ Anova(glm4)
 ```
 
 This is the plot for our proportion hatched data (Figure 6 in paper)
-# TO DO, make pretty plot. 
 
 ```{r}
-interaction.plot(data$Age.d., data$STIMULUS, data$ProportionHatched)
+interaction.plot(data$Age.d., data$STIMULUS, data$ProportionHatched, 
+                 leg.bty="0", pch=c(18,24), 
+                 ylab="Proportion hatched", 
+                 xlab="Age (days)", 
+                 trace.label="")
 
 ```
 
 
-Here we perform separate binomial GLMs at each age, with grouped categories of treatment stimuli. 
+The image of the figure from the original paper that I'm replicating is included in a folder called “img” within my repo and embedded here: 
 
-# TO DO: MUST DO DIFFERENTLY/MANUALLY
+Specifically, we're looking at part A of the figure. 
+
+<img src="img/Fig6.png" width="200px"/>
+
+
+ALTERNATIVELY, we can use ggplot to create a much prettier plot, with standard errors. Note that ideally the order of younger and older would be switched, but the data presented are the same as presented in the original paper. 
+
+```{r}
+
+ggplot(data, aes(x=as.factor(AgeGroup), y=ProportionHatched, colour=STIMULUS)) + 
+  geom_point(data=younger_errorstats_g8 , size=3) +
+  geom_errorbar(data=younger_errorstats_g8, aes(ymin=ProportionHatched-se, ymax=ProportionHatched+se), width=0.05)+ 
+  geom_point(data=older_errorstats_g8, size=3) +
+  geom_line(data=older_errorstats_g8)+
+  geom_errorbar(data=older_errorstats_g8, aes(ymin=ProportionHatched-se, ymax=ProportionHatched+se), width=0.05)+ 
+  theme_bw(20)+
+  ylab("Proportion of tray hatched\n")+
+  xlab("\n Age group")
+
+```
+
+Moving on: Here we perform separate binomial GLMs at each age, with grouped categories of treatment stimuli. 
 
 ```{r}
 
@@ -387,7 +411,45 @@ Anova(glm4)
 
 ```
 
-Recall that cecause risk in predator attacks probably accrues as a function of time, 
+
+Here we plot the latencies for the first embryo in each tray to hatch: 
+
+In order to do this, we'll get the SEs using our summarySE function. 
+
+```{r}
+
+LtoH_younger_errorstats_g8 <- summarySE(younger, measurevar="FirstHatch.s.", groupvars="STIMULUS", na.rm=TRUE)
+LtoH_younger_errorstats_g8$AgeGroup<-"younger"
+
+LtoH_older_errorstats_g8 <- summarySE(older, measurevar="FirstHatch.s.", groupvars="STIMULUS", na.rm=TRUE)
+LtoH_older_errorstats_g8$AgeGroup<-"older"
+
+```
+
+Now we can make the plot! 
+
+```{r}
+
+ggplot(data, aes(x=as.factor(AgeGroup), y=FirstHatch.s., colour=STIMULUS)) + 
+  geom_point(data=LtoH_younger_errorstats_g8 , size=3) +
+  geom_errorbar(data=LtoH_younger_errorstats_g8, aes(ymin=FirstHatch.s.-se, ymax=FirstHatch.s.+se), width=0.05)+ 
+  geom_point(data=LtoH_older_errorstats_g8, size=3) +
+  geom_errorbar(data=LtoH_older_errorstats_g8, aes(ymin=FirstHatch.s.-se, ymax=FirstHatch.s.+se), width=0.05)+ 
+  theme_bw(20)+
+  ylab("Latency to hatch (seconds)\n")+
+  xlab("\n Age group")
+
+```
+
+
+The image of the figure from the original paper that I'm replicating is included in a folder called “img” within my repo and embedded here: 
+
+Specifically, we've replotted part B of this figure. 
+
+<img src="img/Fig6.png" width="200px"/>
+
+
+Recall that because risk in predator attacks probably accrues as a function of time, 
 but information from temporal properties accrues as a function of cycles, 
 we conducted analyses of latency measured both in time (seconds) 
 and in cycles (dividing time by the cycle length of the stimulus). 
@@ -436,9 +498,7 @@ se(LSolder$FirstHatch.cycles., na.rm=T)
 
 ```
 
-We conducted analyses of latency both on the subset of trays from which at least one individual hatched 
-and also on the full dataset, assigning a latency of 600 s 
-(i.e., the full playback plus post-playback observation period) to trays in which no embryos hatched.
+We conducted analyses of latency both on the subset of trays from which at least one individual hatched and also on the full dataset, assigning a latency of 600 s (i.e., the full playback plus post-playback observation period) to trays in which no embryos hatched.
 
 ```{r}
 
@@ -459,6 +519,45 @@ Anova(glm4)
 
 
 ```
+
+
+Here we plot the latencies for the first embryo in each tray to hatch IN CYCLES: 
+
+In order to do this, we'll get the SEs using our summarySE function. 
+
+```{r}
+
+cycles_younger_errorstats_g8 <- summarySE(younger, measurevar="FirstHatch.cycles.", groupvars="STIMULUS", na.rm=TRUE)
+cycles_younger_errorstats_g8$AgeGroup<-"younger"
+
+cycles_older_errorstats_g8 <- summarySE(older, measurevar="FirstHatch.cycles.", groupvars="STIMULUS", na.rm=TRUE)
+cycles_older_errorstats_g8$AgeGroup<-"older"
+
+```
+
+Now we can make the plot! 
+
+```{r}
+
+ggplot(data, aes(x=as.factor(AgeGroup), y=FirstHatch.cycles., colour=STIMULUS)) + 
+  geom_point(data=cycles_younger_errorstats_g8 , size=3) +
+  geom_errorbar(data=cycles_younger_errorstats_g8, aes(ymin=FirstHatch.cycles.-se, ymax=FirstHatch.cycles.+se), width=0.05)+ 
+  geom_point(data=cycles_older_errorstats_g8, size=3) +
+  geom_errorbar(data=cycles_older_errorstats_g8, aes(ymin=FirstHatch.cycles.-se, ymax=FirstHatch.cycles.+se), width=0.05)+ 
+  theme_bw(20)+
+  ylab("Latency to hatch (cycles)\n")+
+  xlab("\n Age group")
+
+```
+
+
+The image of the figure from the original paper that I'm replicating is included in a folder called “img” within my repo and embedded here: 
+
+Specifically, we've replotted part C of this figure. 
+
+<img src="img/Fig6.png" width="200px"/>
+
+
 
 ### Report of results
 
