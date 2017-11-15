@@ -6,15 +6,24 @@ output: html_document
 ---
 ### A Brief Introduction
 
+<img src="img/IMG_1615.JPG" width="600px"/>
+<img src="img/IMG_1666.JPG" width="600px"/>
+<img src="img/IMG_1697.JPG" width="600px"/>
+<img src="img/IMG_6958.JPG" width="600px"/>
+
 Arboreal embryos of red-eyed treefrogs, *Agalychnis callidryas*, hatch prematurely to escape from egg predators, cued by vibrations in attacks. Young embryos modulate hatching based on multiple frequency and temporal properties of cues, reducing false alarms that unnecessarily expose them to risk in the water. Because the cost of false alarms decreases developmentally we hypothesized that, if sampling costs are high or stimuli ambiguous, older embryos would accept more false alarms. 
 
 ### Methods, again briefly 
 
-We assessed changes in sensitivity to sampling costs using vibration playbacks at two developmental stages. We designed sets of 3 stimuli, based on prior results with younger embryos, so one elicited high hatching and two elicited similarly low hatching, but sampling costs differed between low-hatching stimuli. 
+<img src="img/IMG_2121.JPG" width="600px"/>
+
+We assessed changes in sensitivity to sampling costs using vibration playbacks (to trays of embryos, pictured above, sideways) at two developmental stages. We designed sets of 3 stimuli, based on prior results with younger embryos, so one elicited high hatching and two elicited similarly low hatching, but sampling costs differed between low-hatching stimuli. 
 
 ### File logistics
 
-The original paper and full dataset used are uploaded onto the repository in pdf and csv form, respectively. I will replicate all analyses included in the paper. 
+The original paper and full dataset used are uploaded onto the repository in pdf and csv form, respectively. I will replicate all analyses included in the paper, including mann-whitney-wilcoxon tests, two-sample t-tests, wilcoxon rank sum tests, binomial GLMs, interaction plots, ANOVAs, and AIC model comparisons. 
+
+A report of findings in paragraph form (as presented in the original paper) can be found at the end of the report. 
 
 First, we will clear the environment and set our working directory: 
 
